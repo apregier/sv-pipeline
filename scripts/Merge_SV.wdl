@@ -9,7 +9,6 @@ workflow Merge_SV {
     String cohort_name
 
     # system inputs
-    Int disk_size
     Int preemptible_tries
   }
 
@@ -20,7 +19,6 @@ workflow Merge_SV {
     input:
     input_vcfs = manta_input_vcfs,
     output_vcf_basename = cohort_name + ".manta.lsort",
-    disk_size = disk_size,
     preemptible_tries = preemptible_tries
   }
 
@@ -28,7 +26,6 @@ workflow Merge_SV {
     input:
     input_vcf_gz = lsort_manta.output_vcf_gz,
     output_vcf_basename = cohort_name + ".manta.filter",
-    disk_size = disk_size,
     preemptible_tries = preemptible_tries
   }
 
@@ -36,7 +33,6 @@ workflow Merge_SV {
     input:
     input_vcf_gz = filter_manta.output_vcf_gz,
     output_vcf_basename = cohort_name + ".manta.lmerge",
-    disk_size = disk_size,
     preemptible_tries = preemptible_tries
   }
 
@@ -44,7 +40,6 @@ workflow Merge_SV {
     input:
     input_vcfs = smoove_input_vcfs,
     output_vcf_basename = cohort_name + ".smoove.lsort",
-    disk_size = disk_size,
     preemptible_tries = preemptible_tries
   }
 
@@ -52,7 +47,6 @@ workflow Merge_SV {
     input:
     input_vcf_gz = lsort_smoove.output_vcf_gz,
     output_vcf_basename = cohort_name + ".smoove.filter",
-    disk_size = disk_size,
     preemptible_tries = preemptible_tries
   }
 
@@ -60,7 +54,6 @@ workflow Merge_SV {
     input:
     input_vcf_gz = filter_smoove.output_vcf_gz,
     output_vcf_basename = cohort_name + ".smoove.lmerge",
-    disk_size = disk_size,
     preemptible_tries = preemptible_tries
   }
 
@@ -68,7 +61,6 @@ workflow Merge_SV {
     input:
     input_vcfs = [lmerge_manta.output_vcf_gz, lmerge_smoove.output_vcf_gz],
     output_vcf_basename = cohort_name + ".manta_smoove.lsort",
-    disk_size = disk_size,
     preemptible_tries = preemptible_tries
   }
 
@@ -76,7 +68,6 @@ workflow Merge_SV {
     input:
     input_vcf_gz = lsort_manta_smoove.output_vcf_gz,
     output_vcf_basename = cohort_name + ".manta_smoove.lmerge",
-    disk_size = disk_size,
     preemptible_tries = preemptible_tries
   }
 
